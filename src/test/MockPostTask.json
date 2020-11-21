@@ -1,0 +1,18 @@
+{
+  "creator": {
+    "creatorId": "doctorId"
+  },
+  "patient": {
+    "patientId": "df",
+    "location": "London",
+    "diagnosis": "Covid"
+  },
+  "details": {
+    "description": "blah",
+    "outcome": "blah",
+    "escalationPlan": "blah"
+  },
+  "status": {
+    "dateCreated": "21-11-2020 12:00:00"
+  }
+}

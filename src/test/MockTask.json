@@ -1,0 +1,24 @@
+{
+  "id": 0,
+  "creator": {
+    "creatorId": "doctorId"
+  },
+  "completer": {
+    "completerId": null
+  },
+  "patient": {
+    "patientId": "df",
+    "location": "London",
+    "diagnosis": "Covid"
+  },
+  "details": {
+    "description": "blah",
+    "outcome": "blah",
+    "escalationPlan": "blah"
+  },
+  "status": {
+    "completed": false,
+    "dateCreated": "21-11-2020 12:00:00",
+    "dateCompleted": null
+  }
+}
