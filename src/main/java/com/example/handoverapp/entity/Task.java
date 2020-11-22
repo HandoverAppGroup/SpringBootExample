@@ -31,8 +31,10 @@ public class Task {
     private String completer = "";
     @Column
     private String creator = "";
+    @Column
+    private String patientId = "";
 
-    public Task(boolean completed, Date dateCreated, Date dateCompleted, String description, String outcome, String escalationPlan, String patientLocation, String patientDiagnosis, String completer, String creator) {
+    public Task(boolean completed, Date dateCreated, Date dateCompleted, String description, String outcome, String escalationPlan, String patientLocation, String patientDiagnosis, String completer, String creator, String patientId) {
         this.completed = completed;
         this.dateCreated = dateCreated;
         this.dateCompleted = dateCompleted;
@@ -43,6 +45,7 @@ public class Task {
         this.patientDiagnosis = patientDiagnosis;
         this.completer = completer;
         this.creator = creator;
+        this.patientId = patientId;
     }
 
     public Task(String description, String outcome, String escalationPlan, String patientLocation, String patientDiagnosis, String creator) {
@@ -134,5 +137,13 @@ public class Task {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 }
