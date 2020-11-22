@@ -1,125 +1,138 @@
 package com.example.handoverapp.entity;
 
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
 
+    @Id
+    @GeneratedValue
     private long id;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "creatorId", column = @Column(name = "creator_id")),
-    })
-    private Creator creator = new Creator();
+    @Column(nullable = false)
+    private boolean completed = false;
+    @Column(nullable = false)
+    private Date dateCreated = new Date();
+    @Column
+    private Date dateCompleted = null;
+    @Column
+    private String description = "";
+    @Column
+    private String outcome = "";
+    @Column
+    private String escalationPlan = "";
+    @Column
+    private String patientLocation = "";
+    @Column
+    private String patientDiagnosis = "";
+    @Column
+    private String completer = "";
+    @Column
+    private String creator = "";
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "completerId", column = @Column(name = "completer_id")),
-    })
-    private Completer completer = new Completer();
+    public Task(boolean completed, Date dateCreated, Date dateCompleted, String description, String outcome, String escalationPlan, String patientLocation, String patientDiagnosis, String completer, String creator) {
+        this.completed = completed;
+        this.dateCreated = dateCreated;
+        this.dateCompleted = dateCompleted;
+        this.description = description;
+        this.outcome = outcome;
+        this.escalationPlan = escalationPlan;
+        this.patientLocation = patientLocation;
+        this.patientDiagnosis = patientDiagnosis;
+        this.completer = completer;
+        this.creator = creator;
+    }
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "patientId", column = @Column(name = "patient_id")),
-            @AttributeOverride( name = "location", column = @Column(name = "patient_location")),
-            @AttributeOverride( name = "diagnosis", column = @Column(name = "patient_diagnosis")),
-    })
-    private Patient patient = new Patient();
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "description", column = @Column(name = "description")),
-            @AttributeOverride( name = "outcome", column = @Column(name = "outcome")),
-            @AttributeOverride( name = "escalationPlan", column = @Column(name = "escalation_plan"))
-    })
-    private TaskDetails details = new TaskDetails();
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "completed", column = @Column(name = "completed")),
-            @AttributeOverride( name = "dateCompleted", column = @Column(name = "date_completed")),
-            @AttributeOverride( name = "dateCreated", column = @Column(name = "date_created")),
-    })
-    private TaskStatus status = new TaskStatus();
-
+    public Task(String description, String outcome, String escalationPlan, String patientLocation, String patientDiagnosis, String creator) {
+        this.description = description;
+        this.outcome = outcome;
+        this.escalationPlan = escalationPlan;
+        this.patientLocation = patientLocation;
+        this.patientDiagnosis = patientDiagnosis;
+        this.creator = creator;
+    }
 
     public Task() {}
 
-    public Task(Creator creator, Completer completer, Patient patient, TaskDetails details, TaskStatus status) {
-        this.creator = creator;
-        this.completer = completer;
-        this.patient = patient;
-        this.details = details;
-        this.status = status;
+    public boolean isCompleted() {
+        return completed;
     }
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
-
-
-    @Override
-    public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String created = dateFormat.format(status.getDateCreated());
-        String completed = "";
-        if (status.getCompleted()) {
-            completed = dateFormat.format(status.getDateCompleted());
-        } else {
-            completed = "Not completed yet";
-        }
-        return "Task created: "+created+" completed: "+completed;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-
-    public TaskDetails getDetails() {
-        return details;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public void setDetails(TaskDetails details) {
-        this.details = details;
+    public Date getDateCompleted() {
+        return dateCompleted;
     }
 
-    public TaskStatus getStatus() {
-        return status;
+    public void setDateCompleted(Date dateCompleted) {
+        this.dateCompleted = dateCompleted;
     }
 
-    public void setStatus(TaskStatus status) {
-        this.status = status;
+    public String getDescription() {
+        return description;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public String getOutcome() {
+        return outcome;
     }
 
-    public Creator getCreator() {
-        return creator;
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
     }
 
-    public void setCreator(Creator creator) {
-        this.creator = creator;
+    public String getEscalationPlan() {
+        return escalationPlan;
     }
 
-    public Completer getCompleter() {
+    public void setEscalationPlan(String escalationPlan) {
+        this.escalationPlan = escalationPlan;
+    }
+
+    public String getPatientLocation() {
+        return patientLocation;
+    }
+
+    public void setPatientLocation(String patientLocation) {
+        this.patientLocation = patientLocation;
+    }
+
+    public String getPatientDiagnosis() {
+        return patientDiagnosis;
+    }
+
+    public void setPatientDiagnosis(String patientDiagnosis) {
+        this.patientDiagnosis = patientDiagnosis;
+    }
+
+    public String getCompleter() {
         return completer;
     }
 
-    public void setCompleter(Completer completer) {
+    public void setCompleter(String completer) {
         this.completer = completer;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }
