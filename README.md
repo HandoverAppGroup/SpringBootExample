@@ -10,4 +10,4 @@
 - This API uses the spring-boot-starter-data-rest Spring Boot libraries in order to automatically generate a controller with REST API endpoints
 - By adding methods to TaskRepository, additional endpoints can be generated
 - TaskRepository subclasses PagingAndSortingRepository and therefore automatically includes paging and sorting query parameters for the API endpoints
-- Uses [Spring Data JPA](https://spring.io/projects/spring-data-jpa) to reduce boilerplate code and automatically produce database API queries 
+- Uses [Spring Data JPA](https://spring.io/projects/spring-data-jpa) to reduce boilerplate code and automatically produce database SQL queries 
