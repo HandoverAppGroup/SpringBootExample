@@ -13,14 +13,13 @@ class LoadDatabase {
 
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
+    // Inject some mock data into the database so that Json can be examined straight away when manually testing
+
     @Bean
     CommandLineRunner initDatabase(TaskRepository repository) {
-        Task completedTask = new Task("Example description 3","Example outcome 3","escalation plan","location","diagnosis","creator");
-        completedTask.setCompleted(true);
         return args -> {
-            log.info("Preloading "+repository.save(new Task("Example description 1","Example outcome 1","escalation plan","location","diagnosis","creator")));
-            log.info("Preloading "+repository.save(new Task("Example description 2","Example outcome 2","escalation plan","location","diagnosis","creator")));
-            log.info("Preloading "+repository.save(completedTask));
+            log.info("Preloaded data"+ repository.save(new Task()));
+            log.info("Preloaded data"+ repository.save(new Task()));
         };
     }
 }

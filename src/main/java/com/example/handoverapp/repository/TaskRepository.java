@@ -1,28 +1,31 @@
 package com.example.handoverapp.repository;
 
+
 import com.example.handoverapp.entity.Task;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+@Repository
+public interface TaskRepository extends JpaRepository<Task, Long> {
 
-@RepositoryRestResource(collectionResourceRel = "tasks", path = "tasks")
-public interface TaskRepository extends PagingAndSortingRepository<Task, Long> {
+    @Query("select t from Task t where t.patient.hospitalNumber = ?1")
+    List<Task> findByPatient(String hospitalNumber);
 
-    // URIs for sorting by date are automatically generated
-    // /api/tasks/?sort=dateCreated,asc
-    // /api/tasks/?sort=dateCreated,desc
+    @Query("select t from Task t where t.creator.identifier = ?1")
+    List<Task> findByCreator(String doctorIdentifier);
 
-    @Query("SELECT t FROM Task t WHERE t.completed = true ")
-    Collection<Task> findAllCompletedTasks();
+    @Query("select t from Task t where t.completer.identifier = ?1")
+    List<Task> findByCompleter(String doctorIdentifier);
 
-    // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
-    List<Task> findByPatientId(@Param("patientId") String patientId);
+    @Query("select t from Task t where t.dateCreated >= ?1")
+    List<Task> findByDateCreatedGreaterThanEqual(Date earliest);
+
+    @Query("select t from Task t where t.completed = ?1")
+    List<Task> findByCompleted(boolean isCompleted);
 
 }
